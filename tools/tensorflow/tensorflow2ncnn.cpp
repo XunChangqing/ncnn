@@ -440,6 +440,10 @@ int main(int argc, char** argv)
         {
             fprintf(pp, "%-16s", "ReLU");
         }
+        else if (node.op() == "Relu6")
+        {
+            fprintf(pp, "%-16s", "ReLU6");
+        }
         else if (node.op() == "Reshape")
         {
             fprintf(pp, "%-16s", "Reshape");
@@ -1228,6 +1232,11 @@ int main(int argc, char** argv)
             fprintf(pp, " 0=%d", op_type);
         }
         else if (node.op() == "Relu")
+        {
+            float slope = 0.f;
+            fprintf(pp, " 0=%f", slope);
+        }
+        else if (node.op() == "Relu6")
         {
             float slope = 0.f;
             fprintf(pp, " 0=%f", slope);

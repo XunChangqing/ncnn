@@ -7,6 +7,12 @@ find_file(CMAKE_TOOLCHAIN_FILE ${CMAKE_TOOLCHAIN_FILE_NAME} PATHS ${CMAKE_SOURCE
 message(STATUS "CMAKE_TOOLCHAIN_FILE = ${CMAKE_TOOLCHAIN_FILE}")
 endif()
 
+if(ARM_LINUX_CROSS)
+add_definitions(-mfpu=neon)
+add_definitions(-D__ARM_NEON)
+#add_definitions(-D__aarch64__)
+endif()
+
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
 set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Installation Directory")
 endif()
@@ -59,8 +65,8 @@ endif()
 ##############################################
 
 # add_subdirectory(examples)
-# add_subdirectory(benchmark)
+add_subdirectory(benchmark)
 add_subdirectory(src)
-if(NOT ANDROID AND NOT IOS)
+if(NOT ANDROID AND NOT IOS AND NOT ARM_LINUX_CROSS)
 add_subdirectory(tools)
 endif()
